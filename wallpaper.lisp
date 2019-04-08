@@ -26,7 +26,7 @@
 (defun main (args)
   (let ((path (mof:home ".deco")))
     (flet ((f-chromecast ()
-             (let* ((source "https://git.io/fjIiK")
+             (let* ((source "https://raw.githubusercontent.com/dconnolly/chromecast-backgrounds/master/README.md")
                     (lines (mapcar (lambda (line)
                                      (cl-ppcre:regex-replace-all "!\\[\\]\\((.*)\\)" line "\\1"))
                                    (run/lines `(curl "-sL" ,source)))))
