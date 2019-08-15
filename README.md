@@ -30,7 +30,7 @@ Then, install wallpaper:
 ```bash
 mkdir -p ~/bin ~/common-lisp
 git clone https://github.com/ebzzry/wallpaper ~/common-lisp/wallpaper
-git clone https://github.com/ebzzry/mof ~/common-lisp/mof
+git clone https://github.com/a1b10/mof ~/common-lisp/mof
 curl -O https://beta.quicklisp.org/quicklisp.lisp
 sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (ql:quickload :cl-launch) (sb-ext:quit))'
 make -C ~/common-lisp/wallpaper install
@@ -39,7 +39,7 @@ make -C ~/common-lisp/wallpaper install
 Or, in one line:
 
 ```bash
-mkdir -p ~/bin ~/common-lisp; git clone https://github.com/ebzzry/wallpaper ~/common-lisp/wallpaper; git clone https://github.com/ebzzry/mof ~/common-lisp/mof;  curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (ql:quickload :cl-launch) (sb-ext:quit))'; make -C ~/common-lisp/wallpaper install
+mkdir -p ~/bin ~/common-lisp; git clone https://github.com/ebzzry/wallpaper ~/common-lisp/wallpaper; git clone https://github.com/a1b10/mof ~/common-lisp/mof;  curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (ql:quickload :cl-launch) (sb-ext:quit))'; make -C ~/common-lisp/wallpaper install
 ```
 
 
