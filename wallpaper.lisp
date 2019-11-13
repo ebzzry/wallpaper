@@ -42,21 +42,13 @@ The returned string will contain LENGTH characters chosen from the vector ALPHAB
                   (cl:aref alphabet (random alphabet-length)))
         :finally (return id)))
 
-(defun slurp-file (path)
-  "Read entire file as string."
-  (uiop:read-file-string path))
-
-(defun resolve-system-file (file system)
-  "Return the path of FILE relative to current system."
-  (uiop:merge-pathnames* file (asdf:system-source-directory (asdf:find-system system))))
-
 (defun set-random-chromecast-wallpaper ()
   (let* ((lines (mapcar (lambda (line)
                           (cl-ppcre:regex-replace-all "!\\[\\]\\((.*)\\)" line "\\1"))
                         (cl-ppcre:split "\\s+"
-                                        (slurp-file (resolve-system-file
-                                                     "data/chromecast.txt"
-                                                     :wallpaper))))))
+                                        (mof:slurp-file (mof:resolve-system-file
+                                                         "data/chromecast.txt"
+                                                         :wallpaper))))))
     (deco! *base-path* (random-line lines))))
 
 (defun fetch-random-wallhaven-image (url)
