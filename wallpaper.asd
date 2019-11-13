@@ -16,5 +16,10 @@
                (:version "inferior-shell" "2.0.3.3")
                (:version "fare-utils" "1.0.0.5")
                #:mof
+               #:uiop
+               #:cl-json
+               #:flexi-streams
+               #:drakma
+               #:cl-ppcre
                "wallpaper/utils"
                "wallpaper/wallpaper"))
