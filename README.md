@@ -14,7 +14,7 @@ Wallpaper
 -------------------------------
 
 Wallpaper is a small program that sets a random wallpaper from the
-[Chromecast](https://en.wikipedia.org/wiki/Chromecast) and [Wallhaven](https://alpha.wallhaven.cc/)
+[Chromecast](https://en.wikipedia.org/wiki/Chromecast) and [Wallhaven](https://wallhaven.cc/)
 sets.
 
 
