@@ -4,16 +4,16 @@
     (:use #:cl
           #:cl-scripting
           #:inferior-shell
-          #:fare-utils
           #:optima
           #:optima.ppcre
           #:cl-launch/dispatch
+          #:marie
           #:wallpaper/utils)
   (:export #:wallpaper))
 
 (in-package :wallpaper/wallpaper)
 
-(defvar *base-path* (mof:home ".deco"))
+(defvar *base-path* (home ".deco"))
 
 (defvar *wallhaven-url* "https://wallhaven.cc/api/v1/search?sorting=random"
   "Source URL for Wallhaven interaction.")
@@ -46,7 +46,7 @@ The returned string will contain LENGTH characters chosen from the vector ALPHAB
   (let* ((lines (mapcar (lambda (line)
                           (cl-ppcre:regex-replace-all "!\\[\\]\\((.*)\\)" line "\\1"))
                         (cl-ppcre:split "\\s+"
-                                        (mof:slurp-file (mof:resolve-system-file
+                                        (slurp-file (resolve-system-file
                                                          "data/chromecast.txt"
                                                          :wallpaper))))))
     (deco! *base-path* (random-line lines))))
@@ -56,9 +56,9 @@ The returned string will contain LENGTH characters chosen from the vector ALPHAB
   (let* ((octets (drakma:http-request url))
          (json (flexi-streams:octets-to-string octets :external-format :utf-8)))
     (with-input-from-string (string json)
-      (destructuring-bind (data metadata)
+      (destructuring-bind (data _)
           (cl-json:decode-json string)
-        (declare (ignore metadata))
+        (declare (ignore _))
         (let ((item (nth (random (length (rest data))) (rest data))))
           (loop :for i :in item
                 :when (eql (first i) :path)
@@ -70,17 +70,16 @@ The returned string will contain LENGTH characters chosen from the vector ALPHAB
     (deco! *base-path* url)))
 
 (defun main (args)
-  (destructuring-bind (mode &rest z)
+  (destructuring-bind (mode &rest _)
       args
-    (declare (ignore z))
+    (declare (ignore _))
     (match mode
       ((ppcre "(chromecast|cc)") (set-random-chromecast-wallpaper))
       ((ppcre "(wallhaven|wh)") (set-random-wallhaven-wallpaper))
-      (_ (err (mof:fmt "invalid mode ~A~%" mode))))))
+      (_ (err (fmt "invalid mode ~A~%" mode))))))
 
-(exporting-definitions
- (defun wallpaper (&rest args)
-    "Canonical entry point"
-    (apply #'main args)))
+(defun* (wallpaper t) (&rest args)
+  "Canonical entry point"
+  (apply #'main args))
 
 (register-commands :wallpaper/wallpaper)

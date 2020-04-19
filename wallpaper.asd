@@ -7,19 +7,15 @@
 
 (defsystem :wallpaper
   :name "wallpaper"
-  :version "0.0.1"
+  :version "1.0.0"
   :description "Wallpaper"
   :license "CC0"
-  :author "Rommel MARTINEZ <ebzzry@ebzzry.io>"
+  :author "Rommel MARTINEZ <rom@mimix.io>"
   :class :package-inferred-system
-  :depends-on ((:version "cl-scripting" "0.1")
-               (:version "inferior-shell" "2.0.3.3")
-               (:version "fare-utils" "1.0.0.5")
-               #:mof
-               #:uiop
-               #:cl-json
+  :depends-on (#:cl-json
                #:flexi-streams
                #:drakma
                #:cl-ppcre
+               #:marie
                "wallpaper/utils"
                "wallpaper/wallpaper"))
