@@ -1,14 +1,14 @@
 ;;;; wallpaper.lisp
 
 (uiop:define-package #:wallpaper/wallpaper
-    (:use #:cl
-          #:cl-scripting
-          #:inferior-shell
-          #:optima
-          #:optima.ppcre
-          #:cl-launch/dispatch
-          #:marie
-          #:wallpaper/utils)
+  (:use #:cl
+        #:cl-scripting
+        #:inferior-shell
+        #:optima
+        #:optima.ppcre
+        #:cl-launch/dispatch
+        #:marie
+        #:wallpaper/utils)
   (:export #:wallpaper))
 
 (in-package :wallpaper/wallpaper)
@@ -43,12 +43,12 @@ The returned string will contain LENGTH characters chosen from the vector ALPHAB
         :finally (return id)))
 
 (defun set-random-chromecast-wallpaper ()
-  (let* ((lines (mapcar (lambda (line)
+  (let* ((lines (mapcar (λ (line)
                           (cl-ppcre:regex-replace-all "!\\[\\]\\((.*)\\)" line "\\1"))
                         (cl-ppcre:split "\\s+"
                                         (slurp-file (resolve-system-file
-                                                         "data/chromecast.txt"
-                                                         :wallpaper))))))
+                                                     "data/chromecast.txt"
+                                                     :wallpaper))))))
     (deco! *base-path* (random-line lines))))
 
 (defun fetch-random-wallhaven-image (url)
@@ -78,7 +78,7 @@ The returned string will contain LENGTH characters chosen from the vector ALPHAB
       ((ppcre "(wallhaven|wh)") (set-random-wallhaven-wallpaper))
       (_ (err (fmt "invalid mode ~A~%" mode))))))
 
-(defun* (wallpaper t) (&rest args)
+(def wallpaper (&rest args)
   "Canonical entry point"
   (apply #'main args))
 
