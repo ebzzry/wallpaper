@@ -18,8 +18,10 @@
 (defvar *wallhaven-url* "https://wallhaven.cc/api/v1/search?sorting=random"
   "Source URL for Wallhaven interaction.")
 
+(defvar *cacert* (home "hejmo/dat/certs/ca-certificates.crt"))
+
 (defun deco! (path url)
-  (run/i `(curl "-s" "-o" ,path ,url))
+  (run/i `(curl "--cacert" ,*cacert* "-s" "-o" ,path ,url))
   (run/i `(deco ,path))
   (success))
 

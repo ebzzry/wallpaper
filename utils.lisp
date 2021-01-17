@@ -8,7 +8,7 @@
 
 (def err (message)
   "Exit with MESSAGE."
-  (die 1 (format t "Error: ~A~%" message)))
+  (uiop:die 1 (format t "Error: ~A~%" message)))
 
 (def apply-args (function options args)
   "Apply FUNCTION to ARGS."
